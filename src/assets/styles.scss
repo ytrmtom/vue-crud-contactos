@@ -1,0 +1,130 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f0f2f5;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+// Define SCSS variables with actual values for SCSS functions
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f0f2f5;
+$card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+
+// Mixin para botones
+@mixin button-styles($bg-color) {
+  background-color: $bg-color;
+  border-color: $bg-color;
+  transition: background-color 0.3s, border-color 0.3s;
+
+  &:hover {
+    background-color: darken($bg-color, 10%);
+    border-color: darken($bg-color, 15%);
+  }
+}
+
+body {
+  background-color: $background-color;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin-top: 80px; // Espacio para navbar fijo
+  padding: 20px;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #343a40;
+
+  .navbar-brand {
+    font-weight: bold;
+    color: #fff;
+
+    &:hover {
+      color: lighten($primary-color, 20%);
+    }
+  }
+
+  .nav-link {
+    color: #fff;
+    font-size: 1.1rem;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.card {
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  margin-bottom: 20px;
+
+  .card-header {
+    background-color: lighten($primary-color, 40%);
+    font-weight: bold;
+  }
+}
+
+.table {
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: $card-shadow;
+
+  th {
+    background-color: darken($primary-color, 10%);
+    color: #fff;
+  }
+}
+
+.btn-primary {
+  @include button-styles($primary-color);
+}
+
+.btn-secondary {
+  @include button-styles($secondary-color);
+}
+
+.btn-danger {
+  @include button-styles(#dc3545);
+}
+
+.add-contact-btn {
+  @include button-styles($primary-color);
+  padding: 10px 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-content {
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+
+  .modal-header {
+    background-color: lighten($primary-color, 40%);
+    border-bottom: 1px solid $primary-color;
+  }
+
+  .modal-title {
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  .form-control {
+    border-radius: $border-radius;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px rgba($primary-color, 0.5);
+    }
+  }
+}

@@ -1,30 +1,27 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <ContactList
+    :contacts="contacts"
+    @delete="handleDelete"
+  />
+  <ContactForm
+    :contact="currentContact"
+    :isEditing="isEditing"
+  />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import ContactList from './components/ContactList.vue';
+import ContactForm from './components/ContactForm.vue';
 
-nav {
-  padding: 30px;
+const store = useStore();
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+const contacts = computed(() => store.state.contacts);
+const currentContact = computed(() => store.state.currentContact);
+const isEditing = computed(() => store.state.isEditing);
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+const handleDelete = (id) => {
+  store.dispatch('deleteContact', id);
+};
+</script>
